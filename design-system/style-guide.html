@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopping Web — Style guide</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="prototype-utils.css">
+<style>
+  .sg { max-width: var(--container-max); margin: 0 auto; padding: var(--space-4) var(--space-3); display: flex; flex-direction: column; gap: var(--space-5); }
+  .sg section { display: flex; flex-direction: column; gap: var(--space-3); }
+  .sg h2 { padding-bottom: var(--space-2); border-bottom: var(--border-width) solid var(--color-border); }
+  .sw { display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--font-size-sm); }
+  .sw-chip { height: var(--space-6); border-radius: var(--radius-md); border: var(--border-width) solid var(--color-border); }
+  .sw code, .sg code { font-size: var(--font-size-sm); color: var(--color-fg-muted); }
+  .bar { height: var(--space-3); background: var(--color-primary); border-radius: var(--radius-sm); }
+  .box { background: var(--color-primary); height: var(--space-6); width: var(--space-6); }
+  .demo { padding: var(--space-3); border: var(--border-width) dashed var(--color-border); border-radius: var(--radius-md); }
+  .overlay-host { position: relative; min-height: calc(var(--space-6) * 3); }
+  .overlay-host .drawer, .overlay-host .modal, .overlay-host .toast, .overlay-host .tooltip { position: static; transform: none; width: auto; max-width: var(--modal-width); }
+  .guidelines h1 { font-size: var(--font-size-lg); }
+  .guidelines ul { margin: 0; padding-left: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); }
+</style>
+</head>
+<body>
+<main class="sg">
+<header class="stack stack-sm">
+  <h1>Shopping Web style guide</h1>
+  <p class="text-muted">Tokens, utility and component classes, and UI guidelines. Tokens come from <code>tokens.css</code>.</p>
+</header>
+
+<section>
+  <h2>Color tokens</h2>
+  <div class="grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--color-fg)"></div><code>color-fg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-fg-muted)"></div><code>color-fg-muted</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-bg)"></div><code>color-bg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-bg-subtle)"></div><code>color-bg-subtle</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-primary)"></div><code>color-primary</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-primary-hover)"></div><code>color-primary-hover</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-on-primary)"></div><code>color-on-primary</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-border)"></div><code>color-border</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-danger)"></div><code>color-danger</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-danger-bg)"></div><code>color-danger-bg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-success)"></div><code>color-success</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-success-bg)"></div><code>color-success-bg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-warning)"></div><code>color-warning</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-warning-bg)"></div><code>color-warning-bg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-info)"></div><code>color-info</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-info-bg)"></div><code>color-info-bg</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--color-overlay);opacity:var(--opacity-overlay)"></div><code>color-overlay</code> (at opacity-overlay)</div>
+  </div>
+  <p class="text-sm">Text pair: <span style="color:var(--color-fg);background:var(--color-bg)">color-fg on color-bg</span> · <span style="color:var(--color-fg-muted)">color-fg-muted</span></p>
+</section>
+
+<section>
+  <h2>Typography tokens</h2>
+  <div class="stack stack-sm">
+    <p style="font-size:var(--font-size-xl)">font-size-xl — The quick brown fox</p>
+    <p style="font-size:var(--font-size-lg)">font-size-lg — The quick brown fox</p>
+    <p style="font-size:var(--font-size-md)">font-size-md — The quick brown fox</p>
+    <p style="font-size:var(--font-size-sm)">font-size-sm — The quick brown fox</p>
+    <p style="font-weight:var(--font-weight-regular)">font-weight-regular · <span style="font-weight:var(--font-weight-medium)">font-weight-medium</span> · <span style="font-weight:var(--font-weight-bold)">font-weight-bold</span></p>
+    <p style="font-family:var(--font-serif);font-size:var(--font-size-lg)">font-serif — Autumn tailoring</p>
+    <p style="letter-spacing:var(--letter-spacing-wide);text-transform:uppercase">letter-spacing-wide</p>
+    <p><code>font-sans</code>, <code>line-height-base</code></p>
+  </div>
+</section>
+
+<section>
+  <h2>Spacing, radius, sizing and other tokens</h2>
+  <div class="cluster cluster-lg" style="align-items:flex-end">
+    <div class="sw"><div class="bar" style="width:var(--space-1)"></div><code>space-1</code></div>
+    <div class="sw"><div class="bar" style="width:var(--space-2)"></div><code>space-2</code></div>
+    <div class="sw"><div class="bar" style="width:var(--space-3)"></div><code>space-3</code></div>
+    <div class="sw"><div class="bar" style="width:var(--space-4)"></div><code>space-4</code></div>
+    <div class="sw"><div class="bar" style="width:var(--space-5)"></div><code>space-5</code></div>
+    <div class="sw"><div class="bar" style="width:var(--space-6)"></div><code>space-6</code></div>
+  </div>
+  <div class="cluster cluster-lg">
+    <div class="sw"><div class="box" style="border-radius:var(--radius-sm)"></div><code>radius-sm</code></div>
+    <div class="sw"><div class="box" style="border-radius:var(--radius-md)"></div><code>radius-md</code></div>
+    <div class="sw"><div class="box" style="border-radius:var(--radius-lg)"></div><code>radius-lg</code></div>
+    <div class="sw"><div class="box" style="border-radius:var(--radius-full)"></div><code>radius-full</code></div>
+  </div>
+  <p class="text-sm text-muted">Also: <code>control-height-sm/md/lg</code>, <code>border-width</code>, <code>focus-ring-width</code>, <code>switch-width</code>, <code>switch-height</code>, <code>check-size</code>, <code>avatar-size</code>, <code>spinner-size</code>, <code>drawer-width</code>, <code>modal-width</code>, <code>container-max</code>, <code>tap-target-min</code>, <code>opacity-overlay</code>, <code>opacity-disabled</code> — each used by the components below.</p>
+</section>
+
+<section>
+  <h2>Component tokens (aliases)</h2>
+  <div class="cluster cluster-lg">
+    <div class="sw"><div class="sw-chip" style="background:var(--button-primary-background)"></div><code>button-primary-background</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-primary-background-hover)"></div><code>button-primary-background-hover</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-primary-foreground)"></div><code>button-primary-foreground</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-secondary-background)"></div><code>button-secondary-background</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-secondary-foreground)"></div><code>button-secondary-foreground</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-secondary-border)"></div><code>button-secondary-border</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-danger-background)"></div><code>button-danger-background</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--button-danger-foreground)"></div><code>button-danger-foreground</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--card-default-background)"></div><code>card-default-background</code></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--card-default-border)"></div><code>card-default-border</code></div>
+  </div>
+  <p class="text-sm text-muted">Also <code>button-default-radius</code>, <code>card-default-radius</code>, <code>card-default-padding</code>.</p>
+</section>
+
+<section>
+  <h2>Buttons</h2>
+  <div class="cluster">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-danger">Danger</button>
+  </div>
+  <div class="cluster">
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-primary">Default</button>
+    <button class="btn btn-primary btn-lg">Large</button>
+    <button class="btn btn-secondary btn-icon" aria-label="Add">+</button>
+    <button class="btn btn-secondary btn-icon btn-sm" aria-label="Add">+</button>
+    <button class="btn btn-secondary btn-icon btn-lg" aria-label="Add">+</button>
+  </div>
+  <div class="cluster">
+    <button class="btn btn-primary" disabled>Disabled</button>
+    <button class="btn btn-secondary" disabled>Disabled</button>
+    <button class="btn btn-ghost" disabled>Disabled</button>
+    <button class="btn btn-danger" disabled>Disabled</button>
+    <span class="text-sm text-muted">Focus: press Tab to see the focus ring.</span>
+  </div>
+</section>
+
+<section>
+  <h2>Form controls</h2>
+  <div class="grid grid-2">
+    <div class="field"><label for="f1">Email</label><input class="input" id="f1" placeholder="you@example.com"><span class="field-hint">We only use it for order updates.</span></div>
+    <div class="field"><label for="f2">ZIP code</label><input class="input is-invalid" id="f2" value="123" aria-invalid="true"><span class="field-error">Enter a 5-digit ZIP code.</span></div>
+    <div class="field"><label for="f3">Disabled</label><input class="input" id="f3" value="Not editable" disabled></div>
+    <div class="field"><label for="f4">Size</label><select class="select" id="f4"><option>Small</option><option>Medium</option></select></div>
+    <div class="field"><label for="f5">Select (invalid)</label><select class="select is-invalid" id="f5"><option>Choose…</option></select></div>
+    <div class="field"><label for="f6">Gift note</label><textarea class="textarea" id="f6"></textarea></div>
+    <div class="field"><label for="f7">Textarea (disabled)</label><textarea class="textarea" id="f7" disabled></textarea></div>
+  </div>
+  <div class="cluster cluster-lg">
+    <label class="choice"><input type="checkbox" class="checkbox"> Unchecked</label>
+    <label class="choice"><input type="checkbox" class="checkbox" checked> Checked</label>
+    <label class="choice"><input type="checkbox" class="checkbox is-invalid"> Invalid</label>
+    <label class="choice"><input type="checkbox" class="checkbox" disabled> Disabled</label>
+    <label class="choice"><input type="radio" class="radio" name="r1"> Off</label>
+    <label class="choice"><input type="radio" class="radio" name="r1" checked> On</label>
+    <label class="choice"><input type="radio" class="radio" disabled> Disabled</label>
+    <label class="choice"><input type="checkbox" class="switch" role="switch"> Switch off</label>
+    <label class="choice"><input type="checkbox" class="switch" role="switch" checked> Switch on</label>
+    <label class="choice"><input type="checkbox" class="switch" role="switch" disabled> Disabled</label>
+  </div>
+</section>
+
+<section>
+  <h2>Dropdown and menu</h2>
+  <div class="cluster" style="align-items:flex-start">
+    <div class="dropdown">
+      <button class="btn btn-secondary" data-menu aria-haspopup="menu">Sort by ▾</button>
+      <div class="dropdown-menu" role="menu" hidden>
+        <button class="dropdown-item" role="menuitemradio" aria-checked="true">Featured</button>
+        <button class="dropdown-item" role="menuitemradio" aria-checked="false">Price: low to high</button>
+        <button class="dropdown-item" role="menuitemradio" aria-checked="false" disabled>Disabled</button>
+      </div>
+    </div>
+    <div class="dropdown is-open">
+      <button class="btn btn-secondary" aria-haspopup="menu">Open state ▾</button>
+      <div class="dropdown-menu is-open" role="menu" style="position:static">
+        <button class="dropdown-item" role="menuitemradio" aria-checked="true">Checked item</button>
+        <button class="dropdown-item" role="menuitemradio" aria-checked="false">Item</button>
+      </div>
+    </div>
+    <div class="menu" role="menu">
+      <a class="dropdown-item" href="#" role="menuitem">Orders</a>
+      <a class="dropdown-item" href="#" role="menuitem">Sign out</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Tabs, accordion, disclosure</h2>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true">Details</button>
+    <button class="tab" role="tab" aria-selected="false">Reviews</button>
+    <button class="tab" role="tab" aria-selected="false">Shipping</button>
+  </div>
+  <div class="accordion">
+    <details class="disclosure" open><summary>Returns</summary><div class="disclosure-body">Free returns within 30 days.</div></details>
+    <details class="disclosure"><summary>Care instructions</summary><div class="disclosure-body">Machine wash cold.</div></details>
+  </div>
+  <details class="disclosure"><summary>Standalone disclosure</summary><div class="disclosure-body">More details here.</div></details>
+</section>
+
+<section>
+  <h2>Card, badge, chip, avatar, divider</h2>
+  <div class="grid grid-2">
+    <div class="card"><h3>Canvas tote</h3><p class="text-muted">Everyday carry in organic cotton.</p><div class="cluster"><span class="badge badge-success">In stock</span><button class="btn btn-primary btn-sm">Add to bag</button></div></div>
+    <div class="card card-interactive"><h3>Interactive card</h3><p class="text-muted">Border highlights on hover.</p></div>
+  </div>
+  <div class="cluster">
+    <span class="badge">Default</span><span class="badge badge-neutral">Neutral</span><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span>
+  </div>
+  <div class="cluster">
+    <button class="chip" aria-pressed="false">Unselected</button><button class="chip" aria-pressed="true">Selected</button>
+    <span class="avatar">AB</span>
+  </div>
+  <hr class="divider">
+</section>
+
+<section>
+  <h2>Overlays</h2>
+  <p class="text-sm text-muted">Shown here in-flow and open; in the product they are hidden by default and toggled with <code>[hidden]</code> / <code>.is-open</code>.</p>
+  <div class="overlay-host stack">
+    <div class="drawer is-open"><h3>Your bag</h3><p class="text-muted">Drawer, right side.</p></div>
+    <div class="modal is-open"><h3>Remove item?</h3><p class="text-muted">This can't be undone.</p><div class="cluster"><button class="btn btn-secondary">Keep</button><button class="btn btn-danger">Remove</button></div></div>
+    <div class="toast is-open" role="status">Added to your bag <button class="btn btn-ghost btn-sm" style="color:inherit">Undo</button></div>
+    <div><span class="tooltip is-open" role="tooltip">Tooltip</span></div>
+    <div class="backdrop is-open is-static" style="position:relative;height:var(--space-6)"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Feedback</h2>
+  <div class="stack stack-sm">
+    <div class="alert alert-info">Info: free shipping over the threshold.</div>
+    <div class="alert alert-success">Success: order placed.</div>
+    <div class="alert alert-warning">Warning: only 2 left.</div>
+    <div class="alert alert-danger">Danger: payment failed.</div>
+  </div>
+  <div class="empty-state"><h3>Your bag is empty</h3><p>Find something you like.</p><a class="btn btn-primary" href="#">Go to Shop</a></div>
+  <div class="stack stack-sm"><span class="skeleton" style="width:60%"></span><span class="skeleton"></span><span class="skeleton" style="width:80%"></span></div>
+  <div class="cluster"><span class="spinner" role="status" aria-label="Loading"></span></div>
+</section>
+
+<section>
+  <h2>Layout helpers</h2>
+  <div class="demo stack"><span class="badge">.stack</span><span class="badge">gap on</span><span class="badge">space-3</span></div>
+  <div class="demo cluster"><span class="badge">.cluster</span><span class="badge">wraps</span><span class="badge">space-2</span></div>
+  <div class="demo grid"><div class="card">.grid</div><div class="card">auto-fill</div><div class="card">columns</div></div>
+  <p class="text-sm text-muted">Variants: <code>.stack-sm</code>, <code>.stack-lg</code>, <code>.cluster-lg</code>, <code>.grid-2</code>, <code>.container</code>.</p>
+</section>
+
+<section class="guidelines">
+  <h2>UI guidelines</h2>
+  <h3>Navigation and information architecture</h3>
+  <ul>
+    <li>Top bar with a horizontal main nav on desktop, collapsing behind a menu button below 768px; shoppers browse far more than they configure, so content gets the full width and no sidebar.</li>
+    <li>Main sections, in order: <strong>Shop</strong> (<code>shop</code>), <strong>Categories</strong> (<code>categories</code>), <strong>Deals</strong> (<code>deals</code>). Each is a top-level destination so product discovery is one tap away.</li>
+    <li>Utility links at the right of the bar: <strong>Wishlist</strong> (<code>wishlist</code>), <strong>Account</strong> (<code>account</code>), <strong>Bag</strong> (<code>bag</code>); the bag stays visible at every width because it is the path to purchase.</li>
+    <li>Mark the current section with <code>aria-current="page"</code> on its <code>data-nav-key</code> link, never with a custom class, so the shell styles it consistently.</li>
+    <li>Checkout is a focused flow: keep the top bar but do not add extra links to it, so shoppers are not pulled away mid-purchase.</li>
+  </ul>
+  <h3>Layout and density</h3>
+  <ul>
+    <li>Spacious consumer layout: use <code>.container</code> for page width and <code>.stack-lg</code> between page sections, because browsing is visual and relaxed.</li>
+    <li>Product listings use <code>.grid</code> (auto-fills columns, one column at 375px); the layout must work from 375px up, with 768px the one breakpoint that changes the shell.</li>
+    <li>Keep one primary action per screen region so the next step is obvious.</li>
+  </ul>
+  <h3>Component usage</h3>
+  <ul>
+    <li>Product, order and review summaries are <code>.card</code>; a card is for a single item that links or acts, so do not nest cards.</li>
+    <li>Order history and line items with several comparable attributes use a plain list or table; on narrow screens prefer a list of <code>.card</code>s over a wide table to avoid horizontal scroll.</li>
+    <li><code>.btn-primary</code> for the single forward action (Add to bag, Place order); <code>.btn-secondary</code> for alternatives; <code>.btn-ghost</code> for low-emphasis actions; <code>.btn-danger</code> only for irreversible actions (Remove, Cancel order).</li>
+    <li>Size, color and fit pickers on a product use <code>.chip</code> (selected = <code>aria-pressed="true"</code>), with out-of-stock sizes <code>disabled</code>; shoppers pick a size before they can add to bag, so it must be one tap.</li>
+    <li>Filters and sort: <code>.chip</code> for quick toggles, <code>.dropdown</code> for sort, <code>.select</code> inside forms; the former are one tap, the latter keep forms native on mobile.</li>
+    <li>Bag preview and quick filters open in a <code>.drawer</code>; confirmations of destructive actions use <code>.modal</code>; <code>.toast</code> confirms background results (Added to bag) without interrupting.</li>
+    <li>Stock and order status use <code>.badge</code> variants (success = in stock/delivered, warning = low stock/pending, danger = out of stock/failed) so status reads the same everywhere.</li>
+    <li>Loading uses <code>.skeleton</code> for product grids and <code>.spinner</code> only for button-sized waits; empty bag, wishlist or search results use <code>.empty-state</code> with a path back to Shop.</li>
+    <li>Form errors: <code>.is-invalid</code> on the control plus an error message in the <code>.field</code>, shown inline, because checkout forms are long and errors must sit next to their cause.</li>
+  </ul>
+  <h3>Theme stance</h3>
+  <ul>
+    <li>Light theme only, with warm-ivory <code>color-bg</code> as the page surface and <code>color-primary</code> reserved for actions and links; garment photography reads best on a soft neutral ground, and a single theme keeps scope small.</li>
+    <li>Clothing-boutique look: headings and the brand use <code>font-serif</code> while body and controls stay in <code>font-sans</code>, and buttons are uppercase with <code>letter-spacing-wide</code>; this gives an editorial fashion feel without hurting readability of prices and sizes.</li>
+    <li>Keep corners crisp (<code>radius-sm</code>/<code>radius-md</code>) and let <code>color-bg-subtle</code> (linen) separate sections instead of heavy borders, because tailored, restrained surfaces keep attention on the clothes.</li>
+  </ul>
+  <h3>Voice and tone</h3>
+  <ul>
+    <li>Friendly, plain and brief: "Added to your bag", not "Item successfully added to cart"; shoppers skim.</li>
+    <li>Sentence case everywhere; buttons start with a verb ("Add to bag", "Place order").</li>
+    <li>Errors say what to do next ("Enter a 5-digit ZIP code"), never blame the shopper.</li>
+    <li>Prices always show the currency symbol and two decimals so totals are never ambiguous.</li>
+  </ul>
+</section>
+</main>
+</body>
+</html>
