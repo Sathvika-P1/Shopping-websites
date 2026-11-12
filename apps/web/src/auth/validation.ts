@@ -16,6 +16,7 @@ export function validateRegistration(email: string, password: string): FieldErro
   let passwordError: string | undefined
   if (!password) passwordError = 'Create a password.'
   else if (password.length < 8) passwordError = 'Use at least 8 characters.'
+  else if (password.length > 128) passwordError = 'Use at most 128 characters.'
   else if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
     passwordError = 'Add at least one letter and one number.'
   }

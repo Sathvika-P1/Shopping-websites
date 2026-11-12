@@ -8,6 +8,7 @@ export default function SignInScreen({ origin, onAuthenticated, onSwitch }: Scre
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [failed, setFailed] = useState(false)
+  const [unavailable, setUnavailable] = useState(false)
   const [pending, setPending] = useState(false)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -16,6 +17,7 @@ export default function SignInScreen({ origin, onAuthenticated, onSwitch }: Scre
     const found = validateLogin(email, password)
     setErrors(found)
     setFailed(false)
+    setUnavailable(false)
     if (Object.keys(found).length > 0) return
 
     setPending(true)
@@ -25,6 +27,8 @@ export default function SignInScreen({ origin, onAuthenticated, onSwitch }: Scre
       onAuthenticated(origin === 'checkout' ? 'checkout' : 'account')
     } else if (result.kind === 'field') {
       setErrors(result.errors)
+    } else if (result.kind === 'network') {
+      setUnavailable(true)
     } else {
       setFailed(true)
       setPassword('')
@@ -37,9 +41,11 @@ export default function SignInScreen({ origin, onAuthenticated, onSwitch }: Scre
       title="Sign in"
       note={origin === 'checkout' ? 'Sign in to continue to checkout.' : undefined}
       banner={
-        failed && (
+        (failed || unavailable) && (
           <div className="alert alert-danger" role="alert">
-            The email or password is not right. Try again.
+            {failed
+              ? 'The email or password is not right. Try again.'
+              : 'Something went wrong and you were not signed in. Try again.'}
           </div>
         )
       }

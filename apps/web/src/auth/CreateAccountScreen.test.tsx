@@ -23,6 +23,15 @@ describe('CreateAccountScreen', () => {
     expect(screen.getByLabelText('Password')).toBeInTheDocument()
   })
 
+  it('shows an error and keeps typed values when the request fails', async () => {
+    vi.mocked(api.register).mockResolvedValue({ ok: false, kind: 'network' })
+    render(<CreateAccountScreen origin="other" onAuthenticated={noop} onSwitch={noop} />)
+    fill('a@b.com', 'plum2024')
+    submit()
+    expect(await screen.findByRole('alert')).toHaveTextContent('Something went wrong')
+    expect(screen.getByLabelText('Email')).toHaveValue('a@b.com')
+  })
+
   it.each([
     ['7 characters (AC 9)', 'abc1234', 'Use at least 8 characters.'],
     ['no number (AC 10)', 'abcdefgh', 'Add at least one letter and one number.'],

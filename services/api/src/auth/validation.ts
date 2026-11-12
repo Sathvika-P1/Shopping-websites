@@ -1,6 +1,9 @@
 export type FieldErrors = { email?: string; password?: string };
 type Input = { email?: unknown; password?: unknown };
 
+/** Bounds the hashing work an unauthenticated request can cause. */
+export const MAX_PASSWORD_LENGTH = 128;
+
 /** Trims and lower-cases an email, as it is stored and matched. */
 export function normalizeEmail(email: unknown): string {
   return typeof email === 'string' ? email.trim().toLowerCase() : '';
@@ -26,6 +29,7 @@ export function validateRegistration(input: Input): FieldErrors {
   let passwordError: string | undefined;
   if (!password) passwordError = 'Create a password.';
   else if (password.length < 8) passwordError = 'Use at least 8 characters.';
+  else if (password.length > MAX_PASSWORD_LENGTH) passwordError = `Use at most ${MAX_PASSWORD_LENGTH} characters.`;
   else if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) {
     passwordError = 'Add at least one letter and one number.';
   }

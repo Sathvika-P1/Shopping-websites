@@ -39,4 +39,12 @@ describe('POST /api/auth/login', () => {
     expect(res.json().errors.password).toBe('Enter your password.');
     expect(store.sessions).toHaveLength(0);
   });
+
+  it('answers a password over 128 characters with the generic error', async () => {
+    const { app, store } = await setup();
+    const res = await login(app, { email: 'maya@example.com', password: 'x'.repeat(129) });
+    expect(res.statusCode).toBe(401);
+    expect(res.json().error).toBe('invalid_credentials');
+    expect(store.sessions).toHaveLength(0);
+  });
 });

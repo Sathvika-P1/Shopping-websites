@@ -26,6 +26,17 @@ describe('SignInScreen', () => {
     expect(screen.getByLabelText('Password')).toHaveClass('is-invalid')
   })
 
+  it('says something went wrong, not wrong credentials, when the request fails', async () => {
+    vi.mocked(api.login).mockResolvedValue({ ok: false, kind: 'network' })
+    render(<SignInScreen origin="other" onAuthenticated={noop} onSwitch={noop} />)
+    fill('a@b.com', 'plum2024')
+    submit()
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent('Something went wrong')
+    expect(alert).not.toHaveTextContent('not right')
+    expect(screen.getByLabelText('Password')).not.toHaveClass('is-invalid')
+  })
+
   it.each([
     ['checkout', 'checkout'],
     ['other', 'account'],

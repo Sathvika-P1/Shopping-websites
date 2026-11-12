@@ -9,12 +9,14 @@ export default function CreateAccountScreen({ origin, onAuthenticated, onSwitch 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
+  const [failed, setFailed] = useState(false)
   const [pending, setPending] = useState(false)
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     const found = validateRegistration(email, password)
     setErrors(found)
+    setFailed(false)
     if (Object.keys(found).length > 0) return
 
     setPending(true)
@@ -22,12 +24,20 @@ export default function CreateAccountScreen({ origin, onAuthenticated, onSwitch 
     setPending(false)
     if (result.ok) onAuthenticated(origin === 'checkout' ? 'checkout' : 'account')
     else if (result.kind === 'field') setErrors(result.errors)
+    else setFailed(true)
   }
 
   return (
     <AuthCard
       title="Create account"
       note={origin === 'checkout' ? 'Create an account to continue to checkout.' : undefined}
+      banner={
+        failed && (
+          <div className="alert alert-danger" role="alert">
+            Something went wrong and your account was not created. Try again.
+          </div>
+        )
+      }
       submitLabel={pending ? 'Creating account…' : 'Create account'}
       pending={pending}
       onSubmit={handleSubmit}

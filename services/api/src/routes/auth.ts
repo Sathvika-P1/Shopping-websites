@@ -2,7 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import type pg from 'pg';
 import { hashPassword, verifyPassword } from '../auth/password.js';
 import { createSession, sessionCookie } from '../auth/sessions.js';
-import { normalizeEmail, validateLogin, validateRegistration } from '../auth/validation.js';
+import { MAX_PASSWORD_LENGTH, normalizeEmail, validateLogin, validateRegistration } from '../auth/validation.js';
 import { getPool } from '../db.js';
 
 const INVALID_CREDENTIALS = {
@@ -48,6 +48,8 @@ export async function authRoutes(app: FastifyInstance, opts: { pool?: pg.Pool } 
     const body = (request.body ?? {}) as Body;
     const errors = validateLogin(body);
     if (Object.keys(errors).length > 0) return reply.code(422).send({ errors });
+    // No stored password can be this long, so skip the hashing work.
+    if ((body.password as string).length > MAX_PASSWORD_LENGTH) return reply.code(401).send(INVALID_CREDENTIALS);
 
     const res = await pool.query('SELECT id, email, password_hash FROM accounts WHERE lower(email) = $1', [
       normalizeEmail(body.email),

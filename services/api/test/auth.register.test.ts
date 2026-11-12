@@ -43,4 +43,12 @@ describe('POST /api/auth/register', () => {
     expect(res.json().errors[field]).toBeTruthy();
     expect(store.accounts).toHaveLength(0);
   });
+
+  it('rejects a password over 128 characters without creating an account', async () => {
+    const { app, store } = setup();
+    const res = await register(app, { email: 'a@b.com', password: `a1${'x'.repeat(127)}` });
+    expect(res.statusCode).toBe(422);
+    expect(res.json().errors.password).toMatch(/128/);
+    expect(store.accounts).toHaveLength(0);
+  });
 });
