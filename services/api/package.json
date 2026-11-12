@@ -9,6 +9,7 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
+    "migrate": "tsx src/migrate.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "e2e": "playwright test",
