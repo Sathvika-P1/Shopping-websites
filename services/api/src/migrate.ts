@@ -3,12 +3,15 @@ import { fileURLToPath } from 'node:url';
 import type pg from 'pg';
 import { getPool } from './db.js';
 
+// Arbitrary constant; serialises runners so instances booting together don't race on the same migration.
+const MIGRATION_LOCK_ID = 7_014_001;
 const MIGRATIONS_DIR = new URL('../migrations/', import.meta.url);
 
 /** Applies every unapplied `migrations/*.sql` in name order, each in its own transaction. */
 export async function runMigrations(pool: pg.Pool): Promise<void> {
   const client = await pool.connect();
   try {
+    await client.query('SELECT pg_advisory_lock($1)', [MIGRATION_LOCK_ID]);
     await client.query('CREATE TABLE IF NOT EXISTS schema_migrations (name text PRIMARY KEY)');
     const done = new Set(
       (await client.query('SELECT name FROM schema_migrations')).rows.map((r: { name: string }) => r.name),
@@ -28,6 +31,7 @@ export async function runMigrations(pool: pg.Pool): Promise<void> {
       }
     }
   } finally {
+    await client.query('SELECT pg_advisory_unlock($1)', [MIGRATION_LOCK_ID]).catch(() => {});
     client.release();
   }
 }

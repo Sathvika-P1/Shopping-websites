@@ -24,7 +24,7 @@ type Props = {
 export default function AuthCard(props: Props) {
   return (
     <div className="card auth-card stack">
-      <h1>{props.title}</h1>
+      <h1 tabIndex={-1}>{props.title}</h1>
       {props.note && <p className="auth-note">{props.note}</p>}
       {props.banner}
       <form className="stack" noValidate onSubmit={props.onSubmit}>
