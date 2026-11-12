@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import type { Destination } from './auth/AuthCard'
+import type { Destination, Origin } from './auth/AuthCard'
 import AuthFlow from './auth/AuthFlow'
+
+// Checkout sends signed-out shoppers here with `?from=checkout`; anything else lands on Account.
+const origin: Origin = new URLSearchParams(window.location.search).get('from') === 'checkout' ? 'checkout' : 'other'
 
 export default function App() {
   const [signedInTo, setSignedInTo] = useState<Destination | null>(null)
@@ -17,7 +20,7 @@ export default function App() {
         <div>
           <span className="spinner" aria-hidden="true" />
         </div>
-        <button className="btn btn-primary btn-lg auth-submit" type="button">
+        <button className="btn btn-primary btn-lg auth-submit" type="button" onClick={() => window.location.assign(checkout ? '/checkout' : '/account')}>
           {checkout ? 'Continue to checkout' : 'Go to Account'}
         </button>
       </main>
@@ -25,7 +28,7 @@ export default function App() {
   }
   return (
     <main>
-      <AuthFlow origin="other" onAuthenticated={setSignedInTo} />
+      <AuthFlow origin={origin} onAuthenticated={setSignedInTo} />
     </main>
   )
 }

@@ -7,7 +7,7 @@
   "packageManager": "pnpm@12.9.1",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/server.js",
+    "start": "node dist/migrate.js && node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "migrate": "tsx src/migrate.ts",
     "typecheck": "tsc --noEmit",
