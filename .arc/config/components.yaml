@@ -1,0 +1,11 @@
+version: 1
+components:
+  comp_storefront_web_ui:
+    name: Storefront Web UI
+    kind: web_ui
+  comp_storefront_api:
+    name: Storefront API
+    kind: api_service
+  comp_database:
+    name: Database
+    kind: managed_service
