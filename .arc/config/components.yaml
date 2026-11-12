@@ -3,9 +3,33 @@ components:
   comp_storefront_web_ui:
     name: Storefront Web UI
     kind: web_ui
+    directory: apps/web
+    stack:
+      choices:
+        styling: tailwind
+        language: typescript
+        framework: react + vite
+        package_manager: pnpm
+        testing_tool_e2e: playwright
+        testing_tool_unit: vitest
+      notes: database not applicable — calls the Storefront API; Vite builds static
+        assets for CDN delivery
   comp_storefront_api:
     name: Storefront API
     kind: api_service
+    directory: services/api
+    stack:
+      choices:
+        database: postgresql
+        language: typescript
+        framework: fastify
+        package_manager: pnpm
+        testing_tool_e2e: playwright
+        testing_tool_unit: vitest
+      notes: styling not applicable — API only; owns data in the managed PostgreSQL
   comp_database:
     name: Database
     kind: managed_service
+    stack:
+      choices:
+        managed_service: PostgreSQL on Amazon RDS
