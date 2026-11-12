@@ -8,12 +8,13 @@ type Props = { origin: Origin; onAuthenticated: (dest: Destination) => void }
 export default function AuthFlow({ origin, onAuthenticated }: Props) {
   const [screen, setScreen] = useState<'sign-in' | 'create-account'>('sign-in')
   const wrapper = useRef<HTMLDivElement>(null)
-  const switched = useRef(false)
+  const shown = useRef(screen)
 
   // The switch button unmounts with its screen, so move focus to the new heading (not on first render).
   useEffect(() => {
-    if (switched.current) wrapper.current?.querySelector('h1')?.focus()
-    switched.current = true
+    if (shown.current === screen) return // first render, or StrictMode's repeat run of it
+    shown.current = screen
+    wrapper.current?.querySelector('h1')?.focus()
   }, [screen])
 
   return (
