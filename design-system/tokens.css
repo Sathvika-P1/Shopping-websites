@@ -1,0 +1,73 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-fg: #1c1917; /** Body text, warm ink */
+  --color-fg-muted: #57534e; /** Secondary text and hints */
+  --color-bg: #faf7f2; /** Page background, warm ivory */
+  --color-bg-subtle: #f1ebe2; /** Subtle surfaces, hover, skeletons, linen */
+  --color-primary: #5b2a4a; /** Brand action color, deep plum */
+  --color-primary-hover: #471f3a; /** Primary hover */
+  --color-on-primary: #ffffff; /** Text on primary and danger fills */
+  --color-border: #d6cfc4; /** Default borders */
+  --color-danger: #b91c1c; /** Destructive and error */
+  --color-danger-bg: #fee2e2; /** Danger tint */
+  --color-success: #15803d; /** Success */
+  --color-success-bg: #dcfce7; /** Success tint */
+  --color-warning: #92400e; /** Warning text */
+  --color-warning-bg: #fef3c7; /** Warning tint */
+  --color-info: #1e40af; /** Info text */
+  --color-info-bg: #dbeafe; /** Info tint */
+  --color-overlay: #000000; /** Backdrop, shown at opacity-overlay */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 999px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-height-lg: 48px;
+  --tap-target-min: 44px; /** Minimum touch target size */
+  --border-width: 1px;
+  --focus-ring-width: 2px;
+  --switch-width: 40px;
+  --switch-height: 24px;
+  --check-size: 18px;
+  --avatar-size: 40px;
+  --spinner-size: 24px;
+  --drawer-width: 360px;
+  --modal-width: 480px;
+  --container-max: 1200px;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Didot, Georgia, serif; /** Editorial display face for headings and brand */
+  --letter-spacing-wide: 1px; /** Tracking for uppercase labels and buttons */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height-base: 1.5;
+  --opacity-overlay: 0.5;
+  --opacity-disabled: 0.5;
+  --button-primary-background: var(--color-primary);
+  --button-primary-background-hover: var(--color-primary-hover);
+  --button-primary-foreground: var(--color-on-primary);
+  --button-secondary-background: var(--color-bg);
+  --button-secondary-foreground: var(--color-fg);
+  --button-secondary-border: var(--color-border);
+  --button-danger-background: var(--color-danger);
+  --button-danger-foreground: var(--color-on-primary);
+  --button-default-radius: var(--radius-md);
+  --card-default-background: var(--color-bg);
+  --card-default-border: var(--color-border);
+  --card-default-radius: var(--radius-lg);
+  --card-default-padding: var(--space-4);
+}
